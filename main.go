@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"math/rand"
 	"net/http"
@@ -74,6 +75,7 @@ func deleteBook(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	fmt.Println("Server started on 8000 port")
 	r := mux.NewRouter()
 	books = append(books, Book{ID: "1", Title: "Война и Мир", Author: &Author{Firstname: "Лев", Lastname: "Толстой"}})
 	books = append(books, Book{ID: "2", Title: "Преступление и наказание", Author: &Author{Firstname: "Фёдор", Lastname: "Достоевский"}})
@@ -83,5 +85,5 @@ func main() {
 	r.HandleFunc("/books/{id}", updateBook).Methods("PUT")
 	r.HandleFunc("/books/{id}", deleteBook).Methods("DELETE")
 	log.Fatal(http.ListenAndServe(":8000", r))
-
+	fmt.Println("Server started on 8000 port")
 }
